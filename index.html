@@ -163,16 +163,22 @@
         }
 
         h1, h2, h3 {
-            color: #55a;
+            color: #449;
         }
 
         .vbox {
-            background: #55a;
+            background: #449;
             padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             border-radius: 20px;
+            box-shadow: 5px 5px 5px #224;
+            transition: 0.3s;
+        }
+
+        .vbox:hover {
+           box-shadow: 2px 2px #224; 
         }
 
         .vbox p {
@@ -182,7 +188,7 @@
         }
 
         .hbox {
-            background: #55a;
+            background: #449;
             padding: 15px;
             display: flex;
             flex-direction: row;
