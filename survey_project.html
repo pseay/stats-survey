@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seay Survey Project</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart', 'table', 'gauge']});
+        google.charts.setOnLoadCallback(drawChart);
+        let surveyData = [
+            [3, 3, 2],
+            [3, 1, 2],
+            [2, 2, 1],
+            [1, 3, 3],
+            [3, 2, 3],
+            [2, 1, 3],
+            [2, 2, 3],
+            [1, 3, 2],
+            [2, 3, 3],
+            [3, 3, 3],
+            [1, 2, 3],
+            [2, 2, 3],
+            [3, 3, 3],
+            [1, 2, 3],
+            [3, 1, 2],
+            [2, 1, 2],
+        ];
+        function drawChart() {
+
+            
+
+            //datatable
+            let surveyDataTable = new google.visualization.DataTable();
+            surveyDataTable.addColumn('number', 'STEM Rating');
+            surveyDataTable.addColumn('number', 'Humanities Rating');
+            surveyDataTable.addColumn('number', 'Art Rating');
+            surveyDataTable.addRows(surveyData);
+
+            var table = new google.visualization.Table(document.getElementById('datatable'));
+
+            table.draw(surveyDataTable, {showRowNumber: true, width: '60%', height: '100%'});
+
+            let data, options;
+            let fav, mid, lfav;
+
+            //STEM
+            let STEM = surveyData.map(row => row[0]);
+            fav = STEM.filter(dp => dp == 3).length;
+            mid = STEM.filter(dp => dp == 2).length;
+            lfav = STEM.filter(dp => dp == 1).length;
+            data = google.visualization.arrayToDataTable([
+                ['Rating', 'Count'],
+                ['Favorite',       fav],
+                ['Mid',            mid],
+                ['Least Favorite', lfav],
+            ]);
+            options = {
+                title: 'STEM Rating',
+                is3D: true,
+                backgroundColor: "#f0f0f0",
+                colors: ['0a3', '#fd3', '#e55']
+            };
+
+            let chartMath = new google.visualization.PieChart(document.getElementById('piechartMath'));
+            chartMath.draw(data, options);
+
+            //humanities
+            let humanities = surveyData.map(row => row[1]);
+            fav = humanities.filter(dp => dp == 3).length;
+            mid = humanities.filter(dp => dp == 2).length;
+            lfav = humanities.filter(dp => dp == 1).length;
+            data = google.visualization.arrayToDataTable([
+                ['Rating', 'Count'],
+                ['Fav',       fav],
+                ['Mid',       mid],
+                ['Least Fav', lfav],
+            ]);
+            options.title = 'Humanities Ratings';
+            
+            var chartEnglish = new google.visualization.PieChart(document.getElementById('piechartEnglish'));
+            chartEnglish.draw(data, options);
+
+            //Art
+            let art = surveyData.map(row => row[2]);
+            fav = art.filter(dp => dp == 3).length;
+            mid = art.filter(dp => dp == 2).length;
+            lfav = art.filter(dp => dp == 1).length;
+            data = google.visualization.arrayToDataTable([
+                ['Rating', 'Count'],
+                ['Fav',       fav],
+                ['Mid',       mid],
+                ['Least Fav', lfav],
+            ]);
+            options.title = 'Visual and Performing Arts Ratings';
+
+
+            var chartArt = new google.visualization.PieChart(document.getElementById('piechartArt'));
+            chartArt.draw(data, options);
+
+            //Fav
+            let stemFav = surveyData.map(row => row[0]).filter(dp => dp == 3).length;
+            let humanitiesFav = surveyData.map(row => row[1]).filter(dp => dp == 3).length;
+            let artFav = surveyData.map(row => row[2]).filter(dp => dp == 3).length;
+            data = google.visualization.arrayToDataTable([
+                ['Favorite Class', 'Count'],
+                ['Humanities', humanitiesFav],
+                ['Art', artFav],
+                ['STEM', stemFav],
+            ]);
+            options.title = '% Rated Favorite Classes';
+            options.colors = ['#77d', '#7d7', '#d77'];
+
+            var chartFav = new google.visualization.PieChart(document.getElementById('piechartFav'));
+            chartFav.draw(data, options);
+
+            //LFav
+            let stemLFav = surveyData.map(row => row[0]).filter(dp => dp == 1).length;
+            let humanitiesLFav = surveyData.map(row => row[1]).filter(dp => dp == 1).length;
+            let artLFav = surveyData.map(row => row[2]).filter(dp => dp == 1).length;
+            data = google.visualization.arrayToDataTable([
+                ['Least Favorite Class', 'Count'],
+                ['Humanities', humanitiesLFav],
+                ['Art', artLFav],
+                ['STEM', stemLFav],
+            ]);
+            options.title = '% Rated Least Favorite Classes';
+
+            var chartLFav = new google.visualization.PieChart(document.getElementById('piechartLeastFav'));
+            chartLFav.draw(data, options);
+
+            //Guages
+            var gaugeData = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['STEM', 2.13],
+                ['Humanities', 2.13],
+                ['Art', 2.56]
+            ]);
+
+            let gOptions = {
+                width: 600, height: 200,
+                redFrom: 0, redTo: 1.5,
+                yellowFrom: 1.5, yellowTo: 2.25,
+                greenFrom: 2.25, greenTo: 3,
+                minorTicks: 5,
+                max: 3
+            };
+
+        var chart = new google.visualization.Gauge(document.getElementById('gauges'));
+
+        chart.draw(gaugeData, gOptions);
+
+
+
+        }
+    </script>
+    <style>
+        * {
+            text-align: center;
+        }
+        body {
+            background: #f0f0f0;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #55a;
+        }
+
+        .vbox {
+            background: #55a;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .vbox p {
+            color: white;
+            width: 50%;
+            margin: 15px auto;
+        }
+
+        .hbox {
+            background: #55a;
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        p, li {
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>What do juniors have to Seay about their classes?</h1>
+    <h3>Which are most liked? Which are least liked? Today we'll see what the Francis Parker School's 11th grade thinks...</h3>
+    <br>
+    <h2>Introduction</h2>
+    <div class="vbox">
+        <p>As part of an assignment to conduct a survey of randomly-selected Francis Parker members, the statistician overseeing the survey applied a table of random digits to select 16 students in the 11th grade. Next, they sent a survey to inquire about their ratings of their class types and analyzed the results.</p>
+    </div>
+    <br>
+    <h2>Collecting the Data</h2>
+    <div class="vbox">
+        <p>The steps for selecting the individuals were as follows. #1: Selecting 3 random digits at a time from the given row (row 162). #2 Discarding the number if it was too high (over 1000 - (1000 % population size)). #3 Mapping the number to a person from the grade (given an alphebatized list). #4 Repeat steps #1-3 until 16 students were selected. (process <a href="https://docs.google.com/spreadsheets/d/1CUA2aqfO43pUXWjH9XfcsQkedost4M4t/edit#gid=1717843664">here</a>)</p>
+        <p>Then, the statistician conducting the survey wrote up 3 questions they wished to ask and got them signed off by the Roudebush Institutional Review Board (signature <a href="https://docs.google.com/document/d/1ISUBY-9qwVIubTGZXVE1TZfVxKUZZL1X4HsLK89iO2Q/edit?usp=sharing">here</a>).</p>
+        <p>Once approved, the survey was sent via email to the students surveyed. After following up with those who did not respond, 16 out of 16 responded.</p>
+        <div id="datatable"></div>
+    </div>
+    <br>
+    <h2>Data Analysis</h2>
+    <div class="vbox">
+        <p>Data and Calculations <a href="https://docs.google.com/spreadsheets/d/1lkBKTgR-f6-ebGPzMhD9krlHaMqasRucUhdG6dYbnpU/edit?resourcekey#gid=947943885">Here</a></p>
+        <div class="hbox">
+            <div id="piechartMath"></div>
+            <div id="piechartEnglish"></div>
+            <div id="piechartArt"></div>
+        </div>
+        <p><strong>Comments: </strong>Both Humanities and STEM classes received the same ratings, displaying more students enjoying the class than not enjoying the class. Art stands out by far with the most students rating it as a favorite class and the least students rating it least favorite. With 95% certainty, less than 1/5th of the 11th grade would rate art as their least favorite class.</p>
+        <div class="hbox">
+            <div id="piechartFav"></div>
+            <div id="piechartLeastFav"></div>
+        </div>
+        <p><strong>Comments: </strong>Of the ratings for most favorite classes, about half is attributed to Art and half is attributed to the combination of STEM and Humanities. However, for least favorite ratings, STEM and Humanities take the lead with 89% of the least favorite ratings, leaving Art as the least least favorite class.</p>
+        <div style="padding: auto; margin: auto;" id="gauges"></div>
+        <h3 style="color: white;">Let's get mean</h3>
+        <p>Looking at the mean ratings for each class, STEM and Humanities both scored a whopping 2.13⭐ rating, but coming in the lead, Art wins by 20% with the high score of 2.56⭐.</p>
+    </div>
+    <h2>The Results are in...</h2>
+    <div class="vbox">
+        <img src="results.jpg" height="400px" width="400px" style="margin: auto;">
+        <span style="color: white;">(made with AI)</span>
+        <p>In the least favorite corner, we have the heavyweights, STEM and Humanities, taking a whopping 89% of the least favorite ratings. They both scored a respectable, but not quite top-tier, 2.13⭐ rating.</p>
+        <p>But wait, who’s that in the distance? It’s Art, striding confidently towards the podium. With the majority of students rating it as their favorite and very few rating it as their least favorite, Art has clearly won the hearts of the 11th grade. In fact, with 95% certainty, less than a fifth of the grade would rate Art as their least favorite class.</p>
+        <p>And now, for the grand finale, the mean ratings! Drumroll, please… 🥁 Art leads by 20% with a high score of 2.56⭐! Let’s hear it for Art, the most preferred subject among these students! 🎉🎨🏆</p>
+    </div>
+</body>
+</html>
