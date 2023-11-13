@@ -181,7 +181,7 @@
            box-shadow: 2px 2px #224; 
         }
 
-        .vbox p {
+        .vbox p, .vbox h3 {
             color: white;
             width: 50%;
             margin: 15px auto;
@@ -201,9 +201,20 @@
             font-family: 'Times New Roman', Times, serif;
             font-size: 1.25em;
         }
+        
+        span {
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.75em;
+        }
 
         a {
             color: rgb(0, 221, 255);
+        }
+
+        img {
+            border-radius: 40px;
+            margin: auto;
         }
 
     </style>
@@ -214,7 +225,9 @@
     <br>
     <h2>Introduction</h2>
     <div class="vbox">
-        <p>As part of an assignment to conduct a survey of randomly-selected Francis Parker members, the statistician overseeing the survey applied a table of random digits to select 16 students in the 11th grade. Next, they sent a survey to inquire about their ratings of their class types and analyzed the results.</p>
+        <img src="juniors-voting.jpg" height="400px" width="400px">
+        <span style="color: white;">Juniors on Lancer Lawn (image made with AI)</span>
+        <p>As part of an assignment to conduct a survey of randomly-selected Francis Parker members, a statistician applied a table of random digits to select 16 students in the 11th grade. Next, they sent a survey to inquire about their ratings of their class types and analyzed the results.</p>
     </div>
     <br>
     <h2>Collecting the Data</h2>
@@ -222,34 +235,40 @@
         <p>The steps for selecting the individuals were as follows. #1: Selecting 3 random digits at a time from the given row (row 162). #2 Discarding the number if it was too high (over 1000 - (1000 % population size)). #3 Mapping the number to a person from the grade (given an alphebatized list). #4 Repeat steps #1-3 until 16 students were selected. (process <a href="https://docs.google.com/spreadsheets/d/1CUA2aqfO43pUXWjH9XfcsQkedost4M4t/edit#gid=1717843664">here</a>)</p>
         <p>Then, the statistician conducting the survey wrote up 3 questions they wished to ask and got them signed off by the Roudebush Institutional Review Board (signature <a href="https://docs.google.com/document/d/1ISUBY-9qwVIubTGZXVE1TZfVxKUZZL1X4HsLK89iO2Q/edit?usp=sharing">here</a>).</p>
         <p>Once approved, the survey was sent via email to the students surveyed. After following up with those who did not respond, 16 out of 16 responded.</p>
+        <p>Here are the responses to the question,<br>
+        How would you rate your enjoyment of _____ classes?<br>(1 - Least Favorite)&nbsp;&nbsp;&nbsp;&nbsp;(2)&nbsp;&nbsp;&nbsp;&nbsp;(3 - Favorite)</p>
         <div id="datatable"></div>
     </div>
     <br>
     <h2>Data Analysis</h2>
     <div class="vbox">
         <p>Data and Calculations <a href="https://docs.google.com/spreadsheets/d/1lkBKTgR-f6-ebGPzMhD9krlHaMqasRucUhdG6dYbnpU/edit?resourcekey#gid=947943885">Here</a></p>
+        <h3>First, let's look at the ratings for each class.</h3>
         <div class="hbox">
             <div id="piechartMath"></div>
             <div id="piechartEnglish"></div>
             <div id="piechartArt"></div>
         </div>
         <p><strong>Comments: </strong>Both Humanities and STEM classes received the same ratings, displaying more students enjoying the class than not enjoying the class. Art stands out by far with the most students rating it as a favorite class and the least students rating it least favorite. With 95% certainty, less than 1/5th of the 11th grade would rate art as their least favorite class.</p>
+        <h3>Now, let's look at which classes were voted favorite and least favorite.</h3>
         <div class="hbox">
             <div id="piechartFav"></div>
             <div id="piechartLeastFav"></div>
         </div>
         <p><strong>Comments: </strong>Of the ratings for most favorite classes, about half is attributed to Art and half is attributed to the combination of STEM and Humanities. However, for least favorite ratings, STEM and Humanities take the lead with 89% of the least favorite ratings, leaving Art as the least least favorite class.</p>
+        <h3>Now let's get mean!</h3>
         <div style="padding: auto; margin: auto;" id="gauges"></div>
-        <h3 style="color: white;">Let's get mean</h3>
-        <p>Looking at the mean ratings for each class, STEM and Humanities both scored a whopping score of 2.13/3 ⭐, but coming in the lead, Art wins by 20% with the high score of 2.56/3⭐.</p>
+        <p>Looking at the mean ratings for each class, STEM and Humanities both scored a whopping score of 2.13/3 ⭐, but coming in the lead, Art wins by 20% with the high score of 2.56/3 ⭐. But the medians are more exciting... the median score for both STEM and Humanities is 2 (a mid-rated class), but Art has the highest possible median rating of 3 (the favorite).</p>
+        <h3>Are STEM and Humanities at odds?</h3>
+        <p>Of the people who had STEM as their favorite, their mean rating of Humanities is 2.2/3. Of the people who had Humanities as their favorite, their mean rating of STEM is 2.2/3. Additionally, the correlation between ratings for STEM and Humanities is weak, at -0.128. This means students can enjoy both STEM and Humanities. However, of those who put Art as their favorite, they rated Humanities higher than STEM with a rating of 2.3 versus 2, demonstrating a slight inclination toward Humanities for Art Students.</p>
     </div>
     <h2>The Results are in...</h2>
     <div class="vbox">
-        <img src="results.jpg" height="400px" width="400px" style="margin: auto;">
-        <span style="color: white;">(made with AI)</span>
-        <p>In the least favorite corner, we have the heavyweights, STEM and Humanities, taking a whopping 89% of the least favorite ratings. They both scored a respectable, but not quite top-tier, 2.13⭐ rating.</p>
-        <p>But wait, who’s that in the distance? It’s Art, striding confidently towards the podium. With the majority of students rating it as their favorite and very few rating it as their least favorite, Art has clearly won the hearts of the 11th grade. In fact, with 95% certainty, less than a fifth of the grade would rate Art as their least favorite class.</p>
-        <p>And now, for the grand finale, the mean ratings! Drumroll, please… 🥁 Art leads by 20% with a high score of 2.56⭐! Let’s hear it for Art, the most preferred subject among these students! 🎉🎨🏆</p>
+        <img src="results.jpg" height="400px" width="400px">
+        <span style="color: white;">Art overpowering STEM and Humanities (image made with AI)</span>
+        <p>At the bottom of the podium, tied for 2nd place, we have STEM and Humanities, taking a whopping 89% of the least favorite ratings. They both scored a respectable, but not quite top-tier, 2.13/3 ⭐ mean rating, with a slightly lower median rating of 2/3 ⭐. But it turns out STEM and Humanities are better friends than people would think... with a weak correlation between STEM and Humanities ratings at -0.128.</p>
+        <p>But wait, who's on the top of the podium? It's Art, standing confidently in 1st place. With the majority of students rating it as their favorite class and very few rating it as their least favorite, Art has clearly won the hearts of the 11th grade. In fact, with 95% certainty, less than a fifth of the grade would rate Art as their least favorite class. Art leads in mean ratings by 20% with a high score of 2.56⭐! Let's hear it for Art, the most preferred subject among these students! 🎉🎨🏆</p>
+        <p>Now you know what those pesky 11th graders think about their classes. They love Art, but aren't afraid to dabble in both STEM and Humanities.</p>
     </div>
 </body>
 </html>
